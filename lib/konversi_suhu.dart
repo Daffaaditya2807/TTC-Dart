@@ -40,8 +40,19 @@ void inputSuhu({
 }) {
   stdout.write("Masukkan suhu = ");
   String? suhu = stdin.readLineSync()?.trim();
-  double? result = func!(suhu: num.parse(suhu!));
-  print("$suhu derajat $conv = ${result.toString()} derajat celcius");
+  //jadi kita harus menghandle terlebih dahulu untuk variable String suhu dan fungsi apakah null apa atau tidak
+  //jika berhasil dihandle maka kita dapat tidak menggunakan blank operator karena sudah dihandle pada code dibawah
+  if (suhu != null && func != null) {
+    //kode sebelumnya
+    // double? result = func!(suhu: num.parse(suhu!));
+
+    //sesudah dihandle
+    double? result = func(suhu: num.parse(suhu));
+
+    print("$suhu derajat $conv = ${result.toString()} derajat celcius");
+  } else {
+    print("Suhu atau fungsi konversi tidak valid");
+  }
 }
 
 double fahrenheitToCelcius({required num suhu}) {
